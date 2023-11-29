@@ -4,7 +4,9 @@ COMPILER := clang++
 
 all: build
 
-build: main.o
+build: gcd
+
+gcd: main.o
 	$(COMPILER) --std=c++20 -Wall -O3 main.o -o gcd
 
 main.o: main.cpp
