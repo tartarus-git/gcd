@@ -29,22 +29,25 @@ T gcd(T a, T b) noexcept {
 	return gcd(b, rest);
 }
 
+long validate_input(long input) {
+	switch (input) {
+		case 0:
+			std::cerr << "[ERROR]: input cannot be 0 or invalid\n";
+			std::exit(1);
+		case LONG_MAX:
+		case LONG_MIN:
+			std::cerr << "[ERROR]: input is out of range of long\n";
+			std::exit(1);
+		default:
+			return input;
+	}
+}
+
 int main(int argc, const char * const *argv) {
 	if (argc != 3) { std::cerr << "[ERROR]: must supply exactly 2 arguments\n"; return 1; }
 
-	long a = std::strtol(argv[1], nullptr, 10);
-	switch (a) {
-		case 0: std::cerr << "[ERROR]: input cannot be 0 or invalid\n"; return 1;
-		case LONG_MAX: case LONG_MIN:
-			std::cerr << "[ERROR]: input is out of range of long\n"; return 1;
-	}
-
-	long b = std::strtol(argv[2], nullptr, 10);
-	switch (b) {
-		case 0: std::cerr << "[ERROR]: input cannot be 0 or invalid\n"; return 1;
-		case LONG_MAX: case LONG_MIN:
-			std::cerr << "[ERROR]: input is out of range of long\n"; return 1;
-	}
+	long a = validate_input(std::strtol(argv[1], nullptr, 10));
+	long b = validate_input(std::strtol(argv[2], nullptr, 10));
 
 	std::cout << gcd(a, b) << '\n';
 }
