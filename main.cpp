@@ -17,6 +17,7 @@ concept gcd_able_t = requires(T instance) {
 	(T)0;
 };
 
+// TODO: Ask about constraints on the gcd function. Can the inputs be negative, can one or both be 0, etc...
 template <gcd_able_t T>
 T gcd(T a, T b) noexcept {
 	if (a < b) {
